@@ -73,7 +73,115 @@ if __name__ == "__main__":
 ```
 
 ### Explicação:
-- **GetDefaultPrinter:** Obtém a impressora por omissão do sistema.
+- **GetDefaulAqui estão alguns módulos Python que permitem o uso do **Wake-on-LAN (WOL)**, com explicações sobre como funcionam:
+
+### 1. **wakeonlan**
+   - **Descrição**: Este é um dos módulos mais simples e populares para enviar pacotes mágicos para dispositivos na rede local. Ele usa apenas o endereço MAC do dispositivo para enviá-lo.
+   - **Instalação**:
+     ```bash
+     pip install wakeonlan
+     ```
+   - **Como funciona**: O módulo constrói o pacote mágico e o transmite pela rede. O pacote mágico contém 6 bytes de `0xFF` seguidos pelo endereço MAC repetido 16 vezes. Quando uma placa de rede que suporta WOL recebe esse pacote, ela acorda o sistema.
+   - **Exemplo**:
+     ```python
+     from wakeonlan import send_magic_packet
+
+     send_magic_packet('AA:BB:CC:DD:EE:FF')  # Substitua pelo endereço MAC real
+     ```
+
+### 2. **wol**
+   - **Descrição**: Este módulo também permite o envio de pacotes WOL e oferece funcionalidades para definir o endereço de IP de broadcast (ou multicast), que pode ser útil se precisar de enviar o pacote para redes específicas.
+   - **Instalação**:
+     ```bash
+     pip install wol
+     ```
+   - **Como funciona**: Ele oferece mais controle sobre o envio do pacote WOL, permitindo o uso de diferentes métodos de broadcast.
+   - **Exemplo**:
+     ```python
+     import wol
+
+     wol.send_wol('AA:BB:CC:DD:EE:FF', ip_address='192.168.1.255')  # Broadcast IP
+     ```
+
+### 3. **etherwake** (usando via subprocess)
+   - **Descrição**: Não é exatamente um módulo Python, mas você pode chamar o **`etherwake`** (uma ferramenta CLI) via Python para enviar pacotes WOL. Este utilitário é comumente usado em distribuições Linux.
+   - **Instalação no Linux**:
+     ```bash
+     sudo apt install etherwake
+     ```
+   - **Como funciona**: Ele é chamado via terminal para enviar pacotes WOL. Em Python, você pode usar `subprocess` para chamar este comando.
+   - **Exemplo**:
+     ```python
+     import subprocess
+
+     subprocess.run(['sudo', 'etherwake', 'AA:BB:CC:DD:EE:FF'])
+     ```
+
+### 4. **socket** (módulo embutido no Python)
+   - **Descrição**: Não é um módulo específico para WOL, mas o **`socket`** é um módulo embutido no Python que permite a construção e envio de pacotes de rede manualmente, incluindo o pacote mágico usado no WOL. Você pode criar o pacote mágico no formato correto e enviá-lo diretamente pela rede.
+   - **Como funciona**: O `socket` pode ser usado para enviar o pacote para a rede através de UDP broadcast.
+   - **Exemplo**:
+     ```python
+     import socket
+
+     def wake_on_lan(mac_address):
+         # Remove caracteres não hexadecimais do endereço MAC
+         mac_address = mac_address.replace(':', '').replace('-', '')
+         # Cria o pacote mágico
+         magic_packet = bytes.fromhex('FF' * 6 + mac_address * 16)
+         # Envia o pacote via socket UDP broadcast
+         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+             sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+             sock.sendto(magic_packet, ('<broadcast>', 9))  # Porta 9 padrão para WOL
+
+     wake_on_lan('AA:BB:CC:DD:EE:FF')
+     ```
+
+### 5. **pywakeonlan**
+   - **Descrição**: Um módulo alternativo para enviar pacotes WOL. Ele é bastante semelhante ao `wakeonlan` com funcionalidades muito básicas para enviar pacotes mágicos.
+   - **Instalação**:
+     ```bash
+     pip install pywakeonlan
+     ```
+   - **Como funciona**: Simplesmente envia o pacote WOL com o endereço MAC especificado.
+   - **Exemplo**:
+     ```python
+     from pywakeonlan import send_magic_packet
+
+     send_magic_packet('AA:BB:CC:DD:EE:FF')
+     ```
+
+### 6. **netwake**
+   - **Descrição**: Uma biblioteca menos conhecida que também implementa Wake-on-LAN. Ele é projetado para ser muito leve, focando exclusivamente no envio de pacotes mágicos.
+   - **Instalação**:
+     ```bash
+     pip install netwake
+     ```
+   - **Como funciona**: Oferece uma API simples para enviar pacotes WOL, sem muitas funcionalidades adicionais.
+   - **Exemplo**:
+     ```python
+     import netwake
+
+     netwake.wake('AA:BB:CC:DD:EE:FF')
+     ```
+
+### 7. **net-tools (ferramenta externa para Linux)**
+   - **Descrição**: Ferramentas externas como **net-tools** também podem ser usadas em sistemas baseados em Linux para enviar pacotes WOL via linha de comando e chamadas de subprocesso em Python, assim como o `etherwake`.
+
+---
+
+### Resumo
+
+- **Módulos Simples (WOL direto)**:  
+  - `wakeonlan`, `pywakeonlan`, `wol`, `netwake`.
+  
+- **Ferramentas de Linha de Comando**:  
+  - `etherwake`, `net-tools` (usado via `subprocess`).
+
+- **Solução Customizada**:  
+  - Usar o módulo embutido **`socket`** do Python para criar manualmente pacotes mágicos e transmiti-los pela rede.
+
+Esses módulos cobrem uma ampla gama de necessidades, desde o simples envio de pacotes WOL até soluções mais configuráveis para redes complexas.tPrinter:** Obtém a impressora por omissão do sistema.
 - **ShellExecute com "print":** Executa o comando de impressão para o ficheiro especificado, enviando-o para a impressora por omissão ou outra especificada.
 
 ### Considerações:
@@ -81,3 +189,4 @@ if __name__ == "__main__":
 - Para a **impressão de rede**, certifique-se de que a impressora de rede está corretamente configurada e acessível.
 
 Estes exemplos devem ajudá-lo a criar "pacotes mágicos" para ligar computadores e imprimir remotamente em Python no Windows 10.
+
