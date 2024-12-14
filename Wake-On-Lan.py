@@ -65,4 +65,5 @@ botao_sair = tk.Button(janela, text="Sair", command=sair)
 botao_sair.pack(pady=10)
 
 # Iniciar o loop principal da interface
-gjanela.mainloop()
+janela.mainloop()
+
