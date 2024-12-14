@@ -189,4 +189,12 @@ Esses módulos cobrem uma ampla gama de necessidades, desde o simples envio de p
 - Para a **impressão de rede**, certifique-se de que a impressora de rede está corretamente configurada e acessível.
 
 Estes exemplos devem ajudá-lo a criar "pacotes mágicos" para ligar computadores e imprimir remotamente em Python no Windows 10.
+- Explicação passo a passo:
+1. O script utiliza o módulo tkinter para criar a interface gráfica.
+2. A função `wake_on_lan` cria um pacote mágico a partir do endereço MAC fornecido e envia-o via UDP para o endereço de broadcast na porta 9.
+3. A função `ligar_pc_remoto` verifica se o campo MAC está preenchido e chama a função `wake_on_lan`.
+4. A janela contém dois campos de entrada para o IP (opcional) e MAC, um botão para enviar o pacote e outro para sair.
+5. O menu "Ficheiro" inclui a opção "Sair" para fechar a aplicação.
+6. O script exibe mensagens de sucesso ou erro usando caixas de diálogo tkinter.
+
 
