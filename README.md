@@ -196,5 +196,7 @@ Estes exemplos devem ajudá-lo a criar "pacotes mágicos" para ligar computadore
 4. A janela contém dois campos de entrada para o IP (opcional) e MAC, um botão para enviar o pacote e outro para sair.
 5. O menu "Ficheiro" inclui a opção "Sair" para fechar a aplicação.
 6. O script exibe mensagens de sucesso ou erro usando caixas de diálogo tkinter.
+   ![Wake-on-LAN](https://github.com/0joseDark/Wake-on-LAN/blob/main/image/Wake-On-Lan.jpg)
+
 
 
