@@ -39,7 +39,7 @@ if __name__ == "__main__":
 - **send_magic_packet:** Esta função envia o pacote WoL para o computador, permitindo que ele se ligue.
 
 ### 2. Imprimir numa Impressora de Rede
-[imprimir-Wake-on-LAN](https://github.com/0joseDark/Wake-on-LAN/blob/main/impressora.md)
+[imprimir com Wake-on-LAN](https://github.com/0joseDark/Wake-on-LAN/blob/main/impressora.md)
 
 Para imprimir documentos numa impressora de rede, podemos usar a biblioteca `win32print`, que faz parte do pacote `pywin32`. Este pacote permite controlar impressoras no Windows, inclusive impressoras de rede.
 
