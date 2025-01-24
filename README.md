@@ -1,4 +1,4 @@
-[English](https://www.google.com)
+[English](https://github.com/0joseDark/Wake-on-LAN/blob/main/English-README.md)
 
 # Wake-on-LAN
  Wake-on-LAN comandos
