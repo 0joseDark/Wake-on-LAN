@@ -1,3 +1,5 @@
+[English](https://www.google.com)
+
 # Wake-on-LAN
  Wake-on-LAN comandos
  
