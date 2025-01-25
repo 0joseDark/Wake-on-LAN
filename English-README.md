@@ -37,7 +37,7 @@ if __name__ == "__main__":
 - **send_magic_packet:** This function sends the WoL packet to the computer, allowing it to turn on.
 
 ### 2. Printing to a Network Printer
-[Printing with Wake-on-LAN](https://github.com/0joseDark/Wake-on-LAN/blob/main/impressora.md)
+[Printing with Wake-on-LAN](https://github.com/0joseDark/Wake-on-LAN/blob/main/English-impressoras.md)
 
 To print documents to a network printer, you can use the `win32print` library, which is part of the `pywin32` package. This package allows controlling printers in Windows, including network printers.
 
